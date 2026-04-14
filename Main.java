@@ -1,7 +1,8 @@
 package com.main;
 
-import com.model.User;
-import com.service.WalletService;
+import com.model.*;
+import com.service.*;
+
 
 import java.util.Scanner;
 
@@ -10,7 +11,7 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-        WalletService service = new WalletService();
+        IWalletService service = new WalletService();
 
         while (true) {
 
@@ -21,7 +22,15 @@ public class Main {
             System.out.println("4. View Transactions");
             System.out.println("5. Show Large Transactions");
             System.out.println("6. Sort Transactions by Amount");
-            System.out.println("7. Exit");
+            System.out.println("7. Create Group");
+            System.out.println("8. Add Member to Group");
+            System.out.println("9. Add Group Expense");
+            System.out.println("10. Settle Expense");
+            System.out.println("11. View Pending Settlements");
+            System.out.println("12. View Group Summary");
+            System.out.println("13. View Balance");
+            System.out.println("14. View My Groups");
+            System.out.println("15. Exit");
             System.out.print("Enter choice: ");
 
             int choice;
@@ -120,6 +129,74 @@ public class Main {
                         break;
 
                     case 7:
+                        System.out.print("Enter Group ID: ");
+                        String gId = sc.nextLine();
+                        System.out.print("Enter Group Name: ");
+                        String gName = sc.nextLine();
+                        System.out.print("Enter Creator Wallet ID: ");
+                        String creatorId = sc.nextLine();
+                        service.createGroup(gId, gName, creatorId);
+                        break;
+
+                    case 8:
+                        System.out.print("Enter Group ID: ");
+                        String gId2 = sc.nextLine();
+                        System.out.print("Enter Member Wallet ID to Add: ");
+                        String memberId = sc.nextLine();
+                        service.addMemberToGroup(gId2, memberId);
+                        break;
+
+                    case 9:
+                        System.out.print("Enter Group ID: ");
+                        String gId3 = sc.nextLine();
+                        System.out.print("Enter Payer Wallet ID: ");
+                        String payerId = sc.nextLine();
+                        System.out.print("Enter Description (e.g. Dinner): ");
+                        String desc = sc.nextLine();
+                        System.out.print("Enter Total Amount: ");
+                        double expAmt;
+                        try {
+                            expAmt = Double.parseDouble(sc.nextLine());
+                        } catch (Exception e) {
+                            System.out.println("Invalid amount!");
+                            break;
+                        }
+                        service.addGroupExpense(gId3, payerId, expAmt, desc);
+                        break;
+
+                    case 10:
+                        System.out.print("Enter Expense ID: ");
+                        String expId = sc.nextLine();
+                        System.out.print("Enter Your Wallet ID: ");
+                        String debtorId = sc.nextLine();
+                        service.settleExpense(expId, debtorId);
+                        break;
+
+                    case 11:
+                        System.out.print("Enter Wallet ID: ");
+                        String wId5 = sc.nextLine();
+                        service.viewPendingSettlements(wId5);
+                        break;
+
+                    case 12:
+                        System.out.print("Enter Group ID: ");
+                        String gId4 = sc.nextLine();
+                        service.viewGroupSummary(gId4);
+                        break;
+                        
+                    case 13:
+                        System.out.print("Enter Wallet ID: ");
+                        String wId6 = sc.nextLine();
+                        service.viewBalance(wId6);
+                        break;
+                        
+                    case 14:
+                        System.out.print("Enter Wallet ID: ");
+                        String wId7 = sc.nextLine();
+                        service.viewUserGroups(wId7);
+                        break;
+
+                    case 15:
                         System.out.println("Exiting... Thank you!");
                         sc.close();
                         return;
