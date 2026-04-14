@@ -1,8 +1,8 @@
 package com.model;
 
-public class Wallet {
-	private String walletId;
-	private User user;
+public final class Wallet {
+	private final String walletId;
+	private final User user;
 	private double balance;
 	
 	public Wallet(String walletId, User user) {
@@ -66,6 +66,26 @@ public class Wallet {
                 ", userId='" + user.getUserId() + '\'' +
                 ", balance=" + balance +
                 '}';
+    }
+    
+    @Override
+    public int hashCode() {
+        int result = 17;
+        result = 31 * result + (walletId == null ? 0 : walletId.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        Wallet other = (Wallet) obj;
+
+        if (walletId == null) {
+            return other.walletId == null;
+        }
+        return walletId.equals(other.walletId);
     }
 	
     
