@@ -1,9 +1,9 @@
 package com.model;
 
-public class User {
-	private String userId;
-	private String name;
-	private String phoneNumber;
+public final class User {
+	private final String userId;
+	private final String name;
+	private final String phoneNumber;
 	
 	public User(String userId, String name, String phoneNumber) {
 		if (userId == null || userId.trim().isEmpty()) {
@@ -63,12 +63,5 @@ public class User {
         }
         return userId.equals(other.userId);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+
 }
