@@ -12,6 +12,8 @@ Balance management
 Transaction history
 Group Management
 Split Expenses
+<img width="872" height="398" alt="image" src="https://github.com/user-attachments/assets/0cb5e6f6-1067-4515-a177-6c892909ce45" />
+
 
 🛠️ Technologies
 Java
