@@ -434,22 +434,21 @@ public class WalletService implements IWalletService {
 
     public void viewPendingSettlements(String walletId) {
 
-        if (!walletMap.containsKey(walletId)) {
-            throw new IllegalArgumentException("Wallet not found");
-        }
-
-        boolean found = splitRecordMap.values().stream()
-                .flatMap(List::stream)
-                .filter(r -> r.getDebtorWalletId().equals(walletId) && !r.isSettled())
-                .peek(System.out::println)
-                .findAny()
-                .isPresent();
-
-        if (!found) {
-            System.out.println("No pending settlements for wallet: " + walletId);
-        }
+    if (!walletMap.containsKey(walletId)) {
+        throw new IllegalArgumentException("Wallet not found");
     }
 
+    List<SplitRecord> pending = splitRecordMap.values().stream()
+            .flatMap(List::stream)
+            .filter(r -> r.getDebtorWalletId().equals(walletId) && !r.isSettled())
+            .toList();
+
+    if (pending.isEmpty()) {
+        System.out.println("No pending settlements for wallet: " + walletId);
+    } else {
+        pending.forEach(System.out::println);
+    }
+}
     public void viewGroupSummary(String groupId) {
 
         Group group = groupMap.get(groupId);
