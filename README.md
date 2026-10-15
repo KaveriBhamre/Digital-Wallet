@@ -6,7 +6,7 @@ A Java-based Digital Wallet application that allows users to manage their wallet
 
 🚀 Features
 User & wallet management
-Add / withdraw money
+Add money
 Money transfers
 Balance management
 Transaction history
